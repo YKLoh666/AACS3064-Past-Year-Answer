@@ -116,9 +116,7 @@ ii)
 
 - Prepend the negative sign => -90<sub>10</sub>
 
-c)
-
-i)
+c) i)
 
 - Provide 0 exponent
   - 5888712 × 10<sup>0</sup>
@@ -195,3 +193,101 @@ d)
   - Positive => 0
 
 Answer: 0 1000 0010 0111 1110 1010 0000 0000 000
+
+### Question 2
+
+a)
+
+- Convert segment address to 20 bit representation
+  - CF88 H => CF880 H
+- Add the offset
+  ```
+     CF880 H
+   +  3ABC H
+  -----------
+     D333C H
+  ```
+
+Answer: D333C H
+
+b)
+
+- Hardware communication components are physical electronic devices that transfer data from one place to another
+  - Example: Modem, Network Card Interface (NIC)
+- Software communication components, commonly known as network protocols, are predefined standard rules to coordinate and interpret the data transferred
+  - Example: HyperText Transfer Protocol (HTTP)
+
+c)
+
+- Data bus: Carry data from components to components
+
+- Address Bus: Carry metadata such as the recipient and destination of the data transmitted in the data bus
+
+- Control Bus: Carry signals such as timing and component's status to coordinate communication between components.
+
+d) 
+
+i)
+
+PC -> MAR ; MAR = 30
+
+MDR -> IR ; IR = 180
+
+IR<sub>[address]</sub> -> MAR ; MAR = 80
+
+MDR -> A ; A = 10<sub>10</sub>
+
+PC + 1 -> PC ; PC = 31
+
+ii)
+
+PC -> MAR ; MAR = 31
+
+MDR -> IR ; IR = 181
+
+IR<sub>[address]</sub> -> MAR ; MAR = 81
+
+MDR + A -> A ; A = 10<sub>10</sub> + 20<sub>10</sub> = 30<sub>10</sub>
+
+PC + 1 -> PC ; PC = 32
+
+iii)
+
+PC -> MAR ; MAR = 32
+
+MDR -> IR ; IR = 182
+
+IR<sub>[address]</sub> -> MAR ; MAR = 82
+
+A -> MDR ; MDR = 30<sub>10</sub>
+
+PC + 1 -> PC ; PC = 33
+
+### Question 3
+
+a) 
+
+- Vectored Interrupt
+  - Interrupt is executed by having the devices direct the processor to perform the appropriate Interrupt Service Routine (ISR).
+  - Example: A printer sends an interrupt code to the CPU to signal it about the completion of printing. The CPU uses the interrupt code to look up the instruction location of the ISR in memory using the Interrupt Vector Table (IVT). The CPU then jump to the corresponding location to execute the ISR.
+- Polled Interrupt
+  - CPU checks the status of the devices periodically to determine if the device requires attention or service.
+  - Example: The CPU checks for the keyboard status periodically. If the keyboard shows a status that requires the CPU to accept a keystroke, the CPU will pause the polling process and execute the service to carry out the task.
+
+b) 
+
+- The I/O module interface the communication between I/O device and CPU. The I/O module interprets device-specific commands and translates them into signals to control the computer hardware.
+- The I/O module supports interrupt capability. It enables the CPU to process other tasks and only give attention to the device when it requests CPU attention through an interrupt.
+
+c)
+
+- A wider path for memory access. It can help to transmit data at a higher rate while reducing memory access.
+- Memory interleaving divides the memory into multiple blocks with points of access. This allows the memory to be accessed simultaneously, which is beneficial for parallel processing.
+- Cache memory is a memory that sits between CPU and random access memory that stores a copy of frequently used data in RAM. This memory has a smaller size but allows quicker data retrieval so the CPU can execute instructions quicker.
+
+d)
+
+- Multiprocessors allow faster execution of tasks through parallel processing.
+- CPU with a faster clock speed can speed up the fetch execute cycle, which also increases the execution speed.
+- A wider bus could allow the instruction and data to transfer at a higher rate with reduced memory and disk access.
+- Increasing the amount of memory can allow it to hold more data and instruction, reducing the slower disk access and improve task execution speed.
