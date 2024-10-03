@@ -225,9 +225,7 @@ c)
 
 - Control Bus: Carry signals such as timing and component's status to coordinate communication between components.
 
-d) 
-
-i)
+d) i)
 
 PC -> MAR ; MAR = 30
 
@@ -290,4 +288,91 @@ d)
 - Multiprocessors allow faster execution of tasks through parallel processing.
 - CPU with a faster clock speed can speed up the fetch execute cycle, which also increases the execution speed.
 - A wider bus could allow the instruction and data to transfer at a higher rate with reduced memory and disk access.
-- Increasing the amount of memory can allow it to hold more data and instruction, reducing the slower disk access and improve task execution speed.
+- Increasing the amount of memory can allow it to hold more data and instruction, reducing the slower disk access and improving task execution speed.
+
+### Question 4
+
+a) i) `E 100 6E8088313C3D` (no space, because space is the delimiter to separates the arguments)
+
+ii) `E 101 55`
+
+iii) `D 100`
+
+iv) `U 100 110`
+
+b)
+
+```assembly
+MOV AX, Q
+ADD AX, 3
+MOV DX, P
+SUB DX, AX
+MOV O, DX
+```
+
+c)
+
+```assembly
+.MODEL SMALL
+.STACK 100H
+.DATA
+ARR DB 1,2,3,4,5,6,7,8,9
+MSG DB "Decimal value is: $"
+MSG2 DB "Binary equivalent value is: $"
+CRLF DB 0DH, 0AH, "$"
+
+.CODE
+.386
+
+MAIN PROC FAR
+MOV AX, @DATA
+MOV DS, AX
+
+MOV CX, 9 ; COUNTER = 9
+MOV BX, 0 ; INDEX = 0
+
+L1:
+
+LEA DX, MSG ; PRINT MSG
+MOV AH, 09H
+INT 21H
+
+MOV DL, ARR[BX] ; PRINT DECIMAL
+ADD DL, 30H
+MOV AH, 02H
+INT 21H
+
+LEA DX, CRLF ; PRINT NEW LINE
+MOV AH, 09H
+INT 21H
+
+LEA DX, MSG2 ; PRINT MSG2
+MOV AH, 09H
+INT 21H
+
+PUSH CX ; SAVE L1 COUNTER VALUE
+MOV CX, 4 ; L2 COUNTER = 4, BECAUSE PRINT 4 BINARY DIGITS
+L2:
+MOV DL, ARR[BX] ; MOV INTO DX
+SHL DX, 1 ; SHIFT LEFT ONCE
+SHR DX, CL ; SHIFT RIGHT BASED ON COUNTER
+AND DL, 1 ; RESERVE ONLY RIGHT MOST BIT VALUE
+ADD DL, 30H ; ADD 30H TO BECOME NUMERICAL CHARACTER
+MOV AH, 02H ; PRINT BINARY DIGIT
+INT 21H
+LOOP L2
+
+LEA DX, CRLF ; PRINT NEW LINE
+MOV AH, 09H
+INT 21H
+
+POP CX ; RESTORE L1 COUNTER VALUE
+INC BX ; INCREMENT INDEX
+LOOP L1
+
+MOV AX, 4C00H ; TERMINATE PROGRAM
+INT 21H
+MAIN ENDP
+
+END MAIN
+```
