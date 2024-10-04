@@ -128,9 +128,7 @@ ii)
 
 - Prepend the negative sign: -110<sub>10</sub>
 
-iii)
-
-The answer produced a carry but did not overflow.
+iii) The answer produced a carry but did not overflow.
 
 C) i)
 
@@ -170,7 +168,7 @@ iii)
   - 127 + 3 = 130
 - Convert the exponent to binary
 
-   130 ÷ 2 = 65 remainder 0
+  130 ÷ 2 = 65 remainder 0
 
   65 ÷ 2 = 32 remainder 1
     
@@ -199,21 +197,33 @@ iii)
 a)
 
 PC -> MAR ; MAR = 34
+
 MDR -> IR ; IR = 156
+
 IR<sub>[address]</sub> -> MAR ; MAR = 56
+
 MDR -> A ; A = 12
+
 PC + 1 -> PC ; PC = 35
 
 PC -> MAR ; MAR = 35
+
 MDR -> IR ; IR = 257
+
 IR<sub>[address]</sub> -> MAR ; MAR = 57
+
 MDR + A -> A; A = 34 + 12 = 46
+
 PC + 1 -> PC ; PC = 36
 
 PC -> MAR ; MAR = 36
+
 MDR -> IR ; IR = 356
+
 IR<sub>[address]</sub> -> MAR ; MAR = 56
+
 A -> MDR ; MDR = 46
+
 PC + 1 -> PC ; PC = 37
 
 b)
@@ -223,11 +233,9 @@ b)
 - RISC has limited address mode. A reduced number of address modes simplifies the implementation and speeds up instruction executions.
 - RISC consists of a large bank of registers. An increased number of registers allows more data to be held, reducing memory access to increase speed.
 
-c)
+c) i) Instruction Register (IR)
 
-i) Instruction Register (IR)
-
-ii) MAR (Memory Address Register)
+ii)Memory Address Register (MAR)
 
 ### Question 3
 
@@ -311,7 +319,7 @@ OPTION DB ?
 
 ; (i) ---------------------------------
 PROMPT DB "Enter an option (1 or 2): $"
-ERROR DB 'Wrong option"
+ERROR DB "Wrong option$"
 ; -------------------------------------
 
 .CODE
