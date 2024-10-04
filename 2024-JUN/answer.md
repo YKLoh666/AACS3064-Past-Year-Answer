@@ -148,14 +148,10 @@ ii)
   ```
 
 - Add the mantissa
-  ```
-     72212
-   + 0030232
-  -----------
-     7251432
-  ```
+  
+  0.72212 + 0.0030232 = 0.7251432 × 10<sup>0</sup> (no adjustment to exponent)
 
-- Prepend back the sign and exponent (no adjustment to the exponent), and round the mantissa to 5 digit
+- Round the mantissa to 5 digits, and prepend the sign and exponent values
 
   Answer: 0 52 72514
 
