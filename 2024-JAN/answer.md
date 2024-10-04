@@ -1,4 +1,4 @@
-# AACS2204 JAN 2024 Answers
+# AACS3064 JAN 2024 Answers
 
 [Link to the paper](https://eprints.tarc.edu.my/27898/1/AACS3064.pdf)
 
