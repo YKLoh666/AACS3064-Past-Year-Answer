@@ -225,4 +225,234 @@ d)
 
 Answer: 0 1000 0101 0101 1100 1000 0000 0000 000<sub>2</sub>
 
-# Question 2
+### Question 2
+
+a)
+
+PC -> MAR ; MAR = 0236
+
+MDR -> IR ; IR = 5458
+
+IR<sub>[address]</sub> -> MAR ; MAR = 0458
+
+MDR + A -> A ; A = 0012 + 146C = 147E
+
+PC + 2 -> PC ; PC = 0238
+
+PC -> MAR ; MAR = 0238
+
+MDR -> IR ; IR = 845A
+
+IR<sub>[address]</sub> -> MAR ; MAR = 045A
+
+A -> MDR ; MDR = 147E
+
+PC + 2 -> PC ; PC = 023A
+
+b)
+
+- Consists of many instructions, making the CPU capable carry out large variety of tasks, but most are not frequently used
+- Each instruction could be very complex due to performing multiple tasks, which takes up execution time
+- Instruction format has variable length, adding complexity to interpreting the instruction
+- Has large amount of addressing mode to aid different needs of each instruction.
+
+c) Data Segment, Code Segment, Stack Segment, Extra Segment
+
+d) Generating object file involves compiling source code from human readable code, such as high-level language or mnemonic, into binary machine code. The machiine code is machine readable, hence the machine can directly uses the machine code to carry out appropriate instruction.
+
+### Question 3
+
+a) 
+
+![Bus diagram](Q3a.png)
+
+b)
+
+Tightly Coupled System | Loosely Coupled System
+-|-
+Is multiprocessor system | Is multicomputer system
+Mutliple CPU shares meory and I/O facilities | Each CPU has its own memory and I/O facilities
+No communication channels between CPU | Has communication channels to synchronize
+One CPU failure cause entire system failure | CPU are independent of each other, so one's failure won't cause the whole to fail
+
+c)
+
+- Direct Memory Access
+  - I/O module has read/write access to the memory directly, bypassing the CPU
+  - CPU send information such as disk address, memory address and size to the I/O module to initialise DMA
+  - I/O module can write onto the memory directly, and send interrupt in the end to signal the completion of data transfer to CPU
+- Interrupt
+  - Unexpected commands that requires immediate attention of CPU to handle
+  - When CPU receives interrupt, it completes the current instruction and push all registers into Program Control Block (PCB), then jump to the interrupt service to perform the instructions
+  - Upon completion, it restores the registers and program counter then resume with the process
+ 
+d) 
+
+i) View memory content: D, View register content: R
+
+ii) "A" enters assembly code into memory, and "E" enters machine code into memory
+
+e) 
+
+> This question is weird, might be error, might be not, I'll provide two set of answers.
+
+```
+if (i < 1 && i > 5) {
+  print 'A'
+}
+```
+
+```assembly
+CMP i, 1
+JGE skip
+CMP i, 5
+JLE skip
+MOV AH, 2
+MOV DL, 'A'
+INT 21H
+
+skip:
+  ; ...
+```
+
+```
+if (i > 1 && i < 5) {
+  print 'A'
+}
+```
+
+```assembly
+CMP i, 1
+JLE skip
+CMP i, 5
+JGE skip
+MOV AH, 2
+MOV DL, 'A'
+INT 21H
+
+skip:
+  ; ...
+```
+
+### Question 4
+
+a)
+
+- Line 4: AL = CC
+- Line 5: CL = 4A
+- Line 6: BL = 33 >> 1 = 0011 0011 >> 1 = 0001 1001 = 19
+- Line 7: 4A & 19 = 0100 1010 & 0001 1001 = 0000 1000 = 8
+
+b)
+
+- Convert the CS into 20 bit representation
+  - 56600 H
+- Add IP
+  ```
+     56600 H
+   +  023F H
+  -----------
+     5683F H
+  ```
+
+Answer: 5683F H
+
+c)
+
+> Only write the pieces of code is enough, showing the full code is for those who want to test run the program
+
+```assembly
+.MODEL SMALL
+.STACK 100H
+.DATA
+  VOWEL DB "aeiouAEIOU", 0
+  COUNT DB ?
+
+  ; (i) ------------------
+  PROMPT DB "Enter a word: $"
+  RESULT DB "Vowel count: $"
+  ; (i) ------------------
+
+  ; (ii) -----------------
+  INPUT LABEL BYTE
+  MAX_LEN DB 20
+  ACT_LEN DB ?
+  BUFFER DB 20 DUP ("$")
+  ; (ii) -----------------
+
+.CODE
+.386
+
+MAIN PROC FAR
+
+  ; (iii) ----------------
+  MOV AX, @DATA
+  MOV DS, AX
+  ; (iii) ----------------
+
+  ; (iv) -----------------
+  LEA DX, PROMPT
+  MOV AH, 09H
+  INT 21H
+  ; (iv) -----------------
+
+  ; (v) ------------------
+  LEA DX, INPUT
+  MOV AH, 0AH
+  INT 21H
+  ; (v) ------------------
+
+  ; (vi) -----------------
+  MOVZX CX, ACT_LEN ; loop for the length of input times
+  MOV BX, 0 ; initialise index to zero, bx points to the index of input
+  MOV DL, 0 ; DL stores the vowel count
+  L1:
+    MOV AL, BUFFER[BX] ; AL store the current character from input
+    LEA DI, VOWEL ; initialise DI to point to the first vowel
+    L2:
+      CMP BYTE PTR [DI], 0 ; check DI points to end of VOWEL string
+      JE END_L2   ; end the loop IF true
+      CMP [DI], AL ; check if the character is the vowel point by DI
+      JNE NOT_MATCH ; handle if not match
+      INC DL ; else match, increment vowel count
+      JMP END_L2 ; end the loop
+
+      NOT_MATCH: 
+        INC DI ; make DI point to the next vowel and proceed with matching
+        JMP L2 ; jump back L2
+
+    END_L2:
+    INC BX
+    LOOP L1 ; jump back L1
+
+  MOV COUNT, DL
+  ; (vi) ------------------
+
+  MOV DL, 0DH ; Print Carriage Return
+  MOV AH, 2
+  INT 21H
+
+  MOV DL, 0AH ; Print Line Feed
+  MOV AH, 2
+  INT 21H
+
+  ; (vii) -----------------
+  LEA DX, RESULT
+  MOV AH, 09H
+  INT 21H
+
+  MOV DL, COUNT
+  ADD DL, 30H
+  MOV AH, 2
+  INT 21H
+  ; (vii) -----------------
+
+  ; (viii) ----------------
+  MOV AX, 4C00H
+  INT 21H
+  ; (viii) ----------------
+
+MAIN ENDP
+
+END MAIN
+```
