@@ -244,8 +244,128 @@ PC + 1 -> PC ; PC : 23
 
 a)
 
-- RAM
-  - RAM serves as a temporary storage between the CPU and disk, which stores the instruction and data currently used by the CPU. This can help the CPU reduce slow disk access which impacts overall performance.
-  - When the user opens a calculator application, the instructions such as arithmetic operations are loaded into the RAM and ready to service the user.
+- Advantages of memory
+  - Memory can be accessed and processed by the CPU fast. This could increase the CPU throughput.
+  Memory serves as temporary data storage that stores actively used instructions and data. Reducing disk access could allow the CPU to gain performance.
+  - Memory creates a smoother multitasking experience. The memory stores the context of each application, allowing the system to switch between processes quickly.
+- Examples
+  - RAM: when the user opens a calculator application, the instructions for arithmetic operations are stored in the RAM, which can be used when the user performs calculations.
+  - ROM: it is written with system startup instruction, which will be used by the CPU to perform the computer startup routine, ensuring the system is well initialised.
  
-Cooking...
+b)
+
+- Addition: a number can be accumulated with another number to get its sum.
+  - 0011 (3) + 0100(4) = 0111 (7)
+- Multiplication: a number can be multiplied by another number to get its product
+  - 0010 (2) + 0011(3) = 0110 (6)
+ 
+c)
+
+- Fetch: The instruction referenced by the program counter is fetched from the main memory and stored in the instruction register
+- Decode: The instruction is decoded and the CPU determines which operation to perform.
+- Execute: the CPU carries out the operation defined by the instruction. As for arithmetic and logical operation, the Arithmetic Logic Unit performs the calculations.
+- Store: The result is stored back in the main memory for future use.
+
+d)
+
+- Character input: The keyboard input transfers a single-byte data from the keyboard to the CPU. Example: alphabetical and numerical characters.
+- Control input: The keyboard input that tells a computer to perform an instruction. Example: Ctrl + C which tells the computer to perform a copying operation
+
+### Question 4
+
+a) i) `E 100 1D3538415B5A`
+
+ii) `E 102 69`
+
+iii) `D 108`
+
+iv) `U 100 110`
+
+b)
+
+```assembly
+MOV AX, N
+ADD AX, 8
+ADD AX, M
+MOV L, AX
+```
+
+c)
+
+i)
+
+```assembly
+arr BYTE 1,2,3,4,5,6,7,8,9
+```
+
+ii)
+
+```assembly
+Messagemin DB "Minimum value is: $"
+Messagemax DB "Maximum value is: $"
+```
+
+iii)
+
+```assembly
+MOV AX, @DATA
+MOV DS, AX
+```
+
+iv)
+
+```assembly
+MOV AL, arr[0]
+MOV DH, AL
+MOV DL, AL
+MOV BX, 1
+MOV CX, 8
+L1:
+  MOV AL, ARR[BX]
+  CMP AL, DL
+  JL is_smaller
+  CMP AL, DH
+  JG is_larger
+  JMP next_loop
+
+  is_smaller:
+    MOV DL, AL
+    JMP next_loop
+
+  is_larger:
+    MOV DH, AL
+
+  next_loop:
+    INC BX
+    LOOP L1
+```
+
+v)
+
+```assembly
+is_larger:
+  MOV DL, AL
+  ADD DL, 30H
+  MOV AH, 02H
+  INT 21H
+  MOV max, DL ; max stores the maximum value in character
+```
+
+vi)
+
+```assembly
+LEA DX, Messagemax
+MOV AH, 09H
+INT 21H
+
+MOV DL, max ; max stores the maximum value in character
+MOV AH, 02H
+INT 21H
+```
+
+vii)
+
+```
+MOV AX, 4C00H
+INT 21H
+```
