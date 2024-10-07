@@ -315,29 +315,28 @@ MOV DS, AX
 iv)
 
 ```assembly
-MOV AL, arr[0]
-MOV DH, AL
-MOV DL, AL
-MOV BX, 1
-MOV CX, 8
+MOV DH, arr[0] ; DH stores max value, initialised with first element
+MOV DL, arr[0] ; DL stores min value, initialised with first element
+MOV BX, 1 ; index points to second element
+MOV CX, 8 ; loop for 8 times (minus one from first element, because it doesn't need to compare)
 L1:
-  MOV AL, ARR[BX]
-  CMP AL, DL
-  JL is_smaller
-  CMP AL, DH
-  JG is_larger
-  JMP next_loop
+  MOV AL, ARR[BX] ; move current element to AL
+  CMP AL, DL ; compare AL with minimum value
+  JL is_smaller ; jump if it is lesser
+  CMP AL, DH ; compare AL with maximum value
+  JG is_larger ; jump if it is larger
+  JMP next_loop ; proceed to next loop if it is none of the current min/max
 
   is_smaller:
-    MOV DL, AL
-    JMP next_loop
+    MOV DL, AL ; update minimum value with current number
+    JMP next_loop ; proceed to next loop
 
   is_larger:
-    MOV DH, AL
+    MOV DH, AL ; update maximum value with current number
 
   next_loop:
-    INC BX
-    LOOP L1
+    INC BX ; increment index to next element
+    LOOP L1 ; loop back to the start
 ```
 
 v)
@@ -345,8 +344,8 @@ v)
 ```assembly
 is_larger:
   MOV DL, AL
-  ADD DL, 30H
-  MOV AH, 02H
+  ADD DL, 30H ; change value into character
+  MOV AH, 02H ; dos service to print one character
   INT 21H
   MOV max, DL ; max stores the maximum value in character
 ```
@@ -365,7 +364,7 @@ INT 21H
 
 vii)
 
-```
+```assembly
 MOV AX, 4C00H
 INT 21H
 ```
