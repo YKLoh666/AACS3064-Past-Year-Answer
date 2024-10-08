@@ -306,7 +306,7 @@ a)
 - Line 6: BL = 44h
 - Line 7: CL = 23h
 - Line 8: DL = C6h
-- Line 9: AL = BBh
+- Line 9: AL = ABh
 
 b)
 
