@@ -13,6 +13,7 @@ Any extra code or explanation related to the question will have its file within 
 - [2024-JAN](2024-JAN/answer.md)
 - [2023-OCT](2023-OCT/answer.md)
 - [2023-JUN](2023-JUN/answer.md)
+- [2023-JAN](2023-JAN/answer.md)
 
 ## Contribution method
 
