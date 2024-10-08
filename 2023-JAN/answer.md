@@ -27,7 +27,8 @@ a) i)
   - 111<sub>2</sub> = 7<sub>8</sub>
   - 111<sub>2</sub> = 7<sub>8</sub>
   - 100<sub>2</sub> = 4<sub>8</sub>
-Answer: 350.774<sub>8</sub>
+
+Answer : 350.774<sub>8</sub>
 
 ii)
 
@@ -54,7 +55,7 @@ ii)
 
   Decimal Part: 1C29...<sub>16</sub>
 
-AnswerL 3F3.1C29...<sub>16</sub>
+Answer : 3F3.1C29...<sub>16</sub>
 
 iii)
 
@@ -159,6 +160,7 @@ c) i)
 - Get the exponent in excess-48
   - 48 + 1 = 49
 - Get the sign: Negative => 9
+
 Answer: 9 49 54321
 
 ii)
@@ -212,11 +214,10 @@ a)
 - The consecutive bytes are stored into the memory cells from right to left
 
   ```
-  Memory
-  -------------------------------------
-  |   8D   |   7C   |   6B   |   5A   |
-  -------------------------------------
-  0x2348   0x2349   0x234A   0x234B
+          -------------------------------------
+  Memory  |   8D   |   7C   |   6B   |   5A   |
+          -------------------------------------
+  Address   0x2348   0x2349   0x234A   0x234B
   ```
 
 b)
