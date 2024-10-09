@@ -148,7 +148,7 @@ b)
 
     = 64 + 32 + 16 + 8 + 4 + 2
 
-    = (-)126<sub>10</sub>
+    = 126<sub>10</sub>
 
 - The answer is not correct because the value of -130 exceeds the 8-bit signed binary representable range [-128, 127]
 - The answer generates carry and overflow
