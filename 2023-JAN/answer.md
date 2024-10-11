@@ -21,14 +21,14 @@ a) i)
   - Result: 1010 1000 . 1111 1110<sub>2</sub>
 - Group the digits into triplets: 010 101 000 . 111 111 100<sub>2</sub>
 - Convert each triplet to octal digit
-  - 010<sub>2</sub> = 3<sub>8</sub>
+  - 010<sub>2</sub> = 2<sub>8</sub>
   - 101<sub>2</sub> = 5<sub>8</sub>
   - 000<sub>2</sub> = 0<sub>8</sub>
   - 111<sub>2</sub> = 7<sub>8</sub>
   - 111<sub>2</sub> = 7<sub>8</sub>
   - 100<sub>2</sub> = 4<sub>8</sub>
 
-Answer : 350.774<sub>8</sub>
+Answer : 250.774<sub>8</sub>
 
 ii)
 
